@@ -1,0 +1,12 @@
+since this server still lacks schema so you dont need to worry about 
+database just now
+
+and since its to demonistrate having no database wont interfare with functionality
+
+####to run to server####
+
+    -after downloading from github
+        -just run npm install
+        -nodemon 
+            if nodemon doesnt work just use
+        -node index.js

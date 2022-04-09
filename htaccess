@@ -1,0 +1,9 @@
+RewriteOptions inherit
+RewriteEngine On
+RewriteRule ^$ http://127.0.0.1:4010/ [P,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ http://127.0.0.1:4010/$1 [P,L]
+RewriteCond %{HTTP_HOST} ^test2posbackend\.kasturimisthanna\.com$
+RewriteRule ^/?$ "https\:\/\/test2posbackend\.kasturimisthanna\.com\/" [R=301,L]
+
