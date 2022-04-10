@@ -33,7 +33,9 @@ app.use('/api/v1', team);
 app.use('/api/v1', changePassword);
 app.use('/api/v1', register);
 // database connection
-const data = mongoose.connect(process.env.MONGO_URL, {
+const DB = process.env.MONGO_URL;
+
+const data = mongoose.connect(DB, {
     useNewUrlParser: true,
 });
 const db = mongoose.connection;
