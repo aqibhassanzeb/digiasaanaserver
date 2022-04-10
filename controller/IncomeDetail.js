@@ -1,9 +1,9 @@
-var { creatTokens,VerifyToken } = require("./JWT");
-const IncomeModal=require('../modals/IncomeDetail');
+var { creatTokens, VerifyToken } = require("./JWT");
+const IncomeModal = require('../modals/IncomeDetail');
 
 const data = [
   {
-    postedId:'6666',
+    postedId: '6666',
     paymentDate: "16/11/2020",
     selfDeposite: "200",
     teamDeposite: "400",
@@ -14,7 +14,7 @@ const data = [
     detail: "mnbdfbdjfbdbfhdhfhdhhd bjhbh jbhjhjkfdjkfdhjfd",
   },
   {
-    postedId:'6666',
+    postedId: '6666',
     paymentDate: "16/11/2020",
     selfDeposite: "200",
     teamDeposite: "400",
@@ -24,7 +24,8 @@ const data = [
     payAmt: "600",
     detail: "mnbdfbdjfbdbfhdhfhdhhd bjhbh jbhjhjkfdjkfdhjfd",
   },
-  { postedId:'1212',
+  {
+    postedId: '1212',
     paymentDate: "16/11/2020",
     selfDeposite: "200",
     teamDeposite: "400",
@@ -38,7 +39,7 @@ const data = [
 
 module.exports.GetIncomeDetail = async (req, res) => {
   console.log(req.headers['authorization'])
-  const Income=await IncomeModal.find({});
+  const Income = await IncomeModal.find({});
 
 
   try {
@@ -52,32 +53,34 @@ module.exports.GetIncomeDetail = async (req, res) => {
 };
 
 // post
-module.exports.PostIncoeDetail=async(req,res)=>{
-    const {paymentDate,selfDeposite,teamDeposite,totalAmt,tds,procesing,payAmt,detail}=req.body;
-    let datas={};
-    let dataed=VerifyToken(req);
-    console.log(dataed)
-    datas.postedId=dataed;
-    datas.paymentDate=paymentDate;
-    datas.selfDeposite=selfDeposite;
-    datas.teamDeposite=teamDeposite;
-    datas.totalAmt=totalAmt;
-    datas.tds=tds;
-    datas.procesing=procesing;
-    datas.payAmt=payAmt;
-    datas.detail=detail;
-    data.push(datas);
-    const Income = new IncomeModal(datas);
-    try{
-      await Income.save();
-      res.status(200).json({
-        message:'payment has been added'
+module.exports.PostIncoeDetail = async (req, res) => {
+  const { paymentDate, selfDeposite, teamDeposite, totalAmt, tds, procesing, payAmt, detail } = req.body;
+  let datas = {};
+  let dataed = VerifyToken(req);
+  console.log('this is post id', dataed)
+  console.log(dataed)
+  datas.postedId = dataed;
+  datas.paymentDate = paymentDate;
+  datas.selfDeposite = selfDeposite;
+  datas.teamDeposite = teamDeposite;
+  datas.totalAmt = totalAmt;
+  datas.tds = tds;
+  datas.procesing = procesing;
+  datas.payAmt = payAmt;
+  datas.detail = detail;
+  data.push(datas);
+  const Income = new IncomeModal(datas);
+  try {
+    await Income.save();
+    res.status(200).json({
+      message: 'payment has been added'
     })
 
-    }catch(error){
-      res.status(500).json({
-        message:error
-      })
-    }
-    
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      message: error
+    })
+  }
+
 }
